@@ -55,7 +55,7 @@ if menu == "Researcher Profile":
     st.write(f"**Institution:** {institution}")
     
     st.image(
-        r"C:\Users\damie\OneDrive\Desktop\Darktable\KNP_20-27_Jan_2024\Sunset (2).jpg",
+        "Sunset (2).jpg",
         caption="Sunset (Damien Ferreira)"
 )
 
@@ -140,4 +140,5 @@ elif menu == "Contact":
     st.header("Contact Information")
     email = "damienferreira@gmail.com"
     st.write(f"You can reach me at {email}.")
+
 
