@@ -126,7 +126,7 @@ elif menu == "STEM Data Explorer":
 
         st.subheader("Reaction Rate (µmol/min) vs Substrate Concentration (mM)")
         st.line_chart(
-        filtered_data.set_index("Substrate Concentration (mM)")["Reaction Rate (µmol/min)"]
+        filtered_enzymes.set_index("Substrate Concentration (mM)")["Reaction Rate (µmol/min)"]
     )
     
     elif data_option == "Protein Characterization":
@@ -150,7 +150,7 @@ elif menu == "STEM Data Explorer":
 
         st.subheader("Isoelectric Point (pI) vs Molecular Weight (kDa)")
         st.line_chart(
-        filtered_data.set_index("Isoelectric Point (pI)")["Molecular Weight (kDa)"]
+        filtered_proteins.set_index("Isoelectric Point (pI)")["Molecular Weight (kDa)"]
     )
     elif data_option == "Bacterial Growt Data":
         st.write("### Bacterial Growt Data")
@@ -173,7 +173,7 @@ elif menu == "STEM Data Explorer":
         
         st.subheader("Temperature (°C) vs Optical Density (OD600)")
         st.line_chart(
-        filtered_data.set_index("Temperature (°C)")["Optical Density (OD600)"]
+        filtered_bacteria_growth.set_index("Temperature (°C)")["Optical Density (OD600)"]
     )
 elif menu == "Contact":
     # Add a contact section
@@ -204,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
