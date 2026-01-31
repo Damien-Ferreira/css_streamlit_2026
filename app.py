@@ -20,23 +20,22 @@ menu = st.sidebar.radio(
 )
 
 # Dummy STEM data
-physics_data = pd.DataFrame({
-    "Experiment": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
-    "Energy (MeV)": [4.2, 1.5, 2.9, 3.4, 7.1],
-    "Date": pd.date_range(start="2024-01-01", periods=5),
+enzyme_kinetics_data = pd.DataFrame({
+    "Enzyme": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
+    "Substrate Concentration (mM)": [4.2, 1.5, 2.9, 3.4, 7.1],
+    "Reaction rate (µmol/min)": pd.date_range(start="2024-01-01", periods=5),
 })
 
-astronomy_data = pd.DataFrame({
-    "Celestial Object": ["Mars", "Venus", "Jupiter", "Saturn", "Moon"],
-    "Brightness (Magnitude)": [-2.0, -4.6, -1.8, 0.2, -12.7],
-    "Observation Date": pd.date_range(start="2024-01-01", periods=5),
+protein_character_data = pd.DataFrame({
+    "Protein": ["Hemoglobin", "Albumin", "Insulin", "Keratin", "Collagen"],
+    "Molecular Weight (kDa)": [64.5, 66.5, 5.8, 54.0, 300.0],
+    "Isoelectric Point (pI)": [6.8, 4.7, 5.3, 7.0, 6.5],
 })
 
-weather_data = pd.DataFrame({
-    "City": ["Cape Town", "London", "New York", "Tokyo", "Sydney"],
-    "Temperature (°C)": [25, 10, -3, 15, 30],
-    "Humidity (%)": [65, 70, 55, 80, 50],
-    "Recorded Date": pd.date_range(start="2024-01-01", periods=5),
+bacterial_growth_data = pd.DataFrame({
+    "Time (hours)": [0, 2, 4, 6, 8],
+    "Optical Density (OD600)": [0.05, 0.18, 0.52, 0.89, 1.10],
+    "Temperature (°C)": [37, 37, 37, 37, 37]
 })
 
 # Sections based on menu selection
@@ -102,45 +101,79 @@ elif menu == "STEM Data Explorer":
     # Tabbed view for STEM data
     data_option = st.sidebar.selectbox(
         "Choose a dataset to explore", 
-        ["Physics Experiments", "Astronomy Observations", "Weather Data"]
+        ["Enzyme Kinetics", "Protein Characterization", "Bacterial Growt Data"]
     )
 
-    if data_option == "Physics Experiments":
-        st.write("### Physics Experiment Data")
-        st.dataframe(physics_data)
+    if data_option == "Enzyme Kinetics":
+        st.write("### Enzyme Kinetics Data")
+        st.dataframe(enzyme_kinetics_data)
         # Add widget to filter by Energy levels
-        energy_filter = st.slider("Filter by Energy (MeV)", 0.0, 10.0, (0.0, 10.0))
-        filtered_physics = physics_data[
-            physics_data["Energy (MeV)"].between(energy_filter[0], energy_filter[1])
+        rate_filter = st.slider("Filter by Reaction Rate (µmol/min)", 
+                                
+        float(enzyme_kinetics_data["Reaction Rate (µmol/min)"].min()),
+        float(enzyme_kinetics_data["Reaction Rate (µmol/min)"].max()),
+        (
+            float(enzyme_kinetics_data["Reaction Rate (µmol/min)"].min()),
+            float(enzyme_kinetics_data["Reaction Rate (µmol/min)"].max())
+        )
+    )
+        
+        filtered_enzymes = enzyme_kinetics_data[
+            enzyme_kinetics_data["Reaction Rate (µmol/min)"].between(rate_filter[0], rate_filter[1])
         ]
-        st.write(f"Filtered Results for Energy Range {energy_filter}:")
-        st.dataframe(filtered_physics)
+        st.write(f"Filtered Results for Reaction Range {rate_filter}:")
+        st.dataframe(filtered_enzymes)
 
-    elif data_option == "Astronomy Observations":
-        st.write("### Astronomy Observation Data")
-        st.dataframe(astronomy_data)
+        st.subheader("Reaction Rate (µmol/min) vs Substrate Concentration (mM)")
+        st.line_chart(
+        filtered_data.set_index("Substrate Concentration (mM)")["Reaction Rate (µmol/min)"]
+    )
+    
+    elif data_option == "Protein Characterization":
+        st.write("### Protein Characterization Data")
+        st.dataframe(protein_character_data)
         # Add widget to filter by Brightness
-        brightness_filter = st.slider("Filter by Brightness (Magnitude)", -15.0, 5.0, (-15.0, 5.0))
-        filtered_astronomy = astronomy_data[
-            astronomy_data["Brightness (Magnitude)"].between(brightness_filter[0], brightness_filter[1])
+        pI_filter = st.slider("Filter by Isoelectric Point (pI)", 
+                              
+        float(protein_character_data["Isoelectric Point (pI)"].min()),
+        float(protein_character_data["Isoelectric Point (pI)"].max()),
+        (
+            float(protein_character_data["Isoelectric Point (pI)"].min()),
+            float(protein_character_data["Isoelectric Point (pI)"].max())
+        )
+    )
+        filtered_proteins = protein_character_data[
+            protein_character_data["Isoelectric Point (pI)"].between(pI_filter[0], pI_filter[1])
         ]
-        st.write(f"Filtered Results for Brightness Range {brightness_filter}:")
-        st.dataframe(filtered_astronomy)
+        st.write(f"Filtered Results for Isoelectric Point {pI_filter}:")
+        st.dataframe(filtered_proteins)
 
-    elif data_option == "Weather Data":
-        st.write("### Weather Data")
-        st.dataframe(weather_data)
+        st.subheader("Isoelectric Point (pI) vs Molecular Weight (kDa)")
+        st.line_chart(
+        filtered_data.set_index("Isoelectric Point (pI)")["Molecular Weight (kDa)"]
+    
+    elif data_option == "Bacterial Growt Data":
+        st.write("### Bacterial Growt Data")
+        st.dataframe(bacterial_growth_data)
         # Add widgets to filter by temperature and humidity
-        temp_filter = st.slider("Filter by Temperature (°C)", -10.0, 40.0, (-10.0, 40.0))
-        humidity_filter = st.slider("Filter by Humidity (%)", 0, 100, (0, 100))
-        filtered_weather = weather_data[
-            weather_data["Temperature (°C)"].between(temp_filter[0], temp_filter[1]) &
-            weather_data["Humidity (%)"].between(humidity_filter[0], humidity_filter[1])
+        optical_density_filter = st.slider("Filter by Optical Density (OD600)", 
+                                           
+        float(bacterial_growth_data["Optical Density (OD600)"].min()),
+        float(bacterial_growth_data["Optical Density (OD600)"].max()),
+        (
+            float(bacterial_growth_data["Optical Density (OD600)"].min()),
+            float(bacterial_growth_data["Optical Density (OD600)"].max())
+        )
+    )
+         filtered_bacteria_growth = bacterial_growth_data[
+            bacterial_growth_data["Optical Density (OD600)"].between(pI_filter[0], pI_filter[1])
         ]
-        st.write(f"Filtered Results for Temperature {temp_filter} and Humidity {humidity_filter}:")
-        st.dataframe(filtered_weather)
+        st.write(f"Filtered Results for Optical Density (OD600) {optical_density_filter}:")
+        st.dataframe(filtered_bacteria_growth)
         
-        
+        st.subheader("Temperature (°C) vs Optical Density (OD600)")
+        st.line_chart(
+        filtered_data.set_index("Temperature (°C)")["Optical Density (OD600)"]
 
 elif menu == "Contact":
     # Add a contact section
@@ -171,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
