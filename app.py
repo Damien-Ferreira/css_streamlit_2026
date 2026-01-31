@@ -173,7 +173,7 @@ elif menu == "STEM Data Explorer":
         
         st.subheader("Temperature (°C) vs Optical Density (OD600)")
         st.line_chart(
-        filtered_bacteria_growth.set_index("Temperature (°C)")["Optical Density (OD600)"]
+        filtered_bacteria_growth.set_index("Optical Density (OD600)")["Temperature (°C)"]
     )
 elif menu == "Contact":
     # Add a contact section
@@ -204,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
