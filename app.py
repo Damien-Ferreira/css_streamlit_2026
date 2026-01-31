@@ -165,7 +165,7 @@ elif menu == "STEM Data Explorer":
             float(bacterial_growth_data["Optical Density (OD600)"].max())
         )
     )
-         filtered_bacteria_growth = bacterial_growth_data[
+        filtered_bacteria_growth = bacterial_growth_data[
             bacterial_growth_data["Optical Density (OD600)"].between(pI_filter[0], pI_filter[1])
         ]
         st.write(f"Filtered Results for Optical Density (OD600) {optical_density_filter}:")
@@ -204,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
