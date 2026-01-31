@@ -137,8 +137,31 @@ elif menu == "STEM Data Explorer":
 
 elif menu == "Contact":
     # Add a contact section
-    st.header("Contact Information")
-    email = "damienferreira@gmail.com"
-    st.write(f"You can reach me at {email}.")
+    st.title("Contact Me")
+    st.write(
+        "If you would like to collaborate, ask questions, or request additional information, "
+        "please use the form below"
+        )
+    st.subheader("Send a Message")
 
+    with st.form("Contact_Form")"
+        name = st.text_input("Your Name")
+        email = st.text_input("Your Email")
+        subject = st.selectbox(
+            "Subject", 
+            ["General Inquiry","Research Collaboration","Data Request","Other"]
+        )
+        message = st.text_area("Message", height 150)
+        submitted = st.form_submit_button("Send Message")
+
+        if submitted:
+            if not name or not email or not message:
+                st.error("Please fill in all required fields.")
+            else:
+                st.success("Thank you your message has been submitted successfully")
+                st.write("**Summary**")
+                st.write(f"- Name: {name}")
+                st.write(f"- Email: {email}")
+                st.write(f"- Subject: {subject}")
+                st.write(f"- Message: {message}")
 
