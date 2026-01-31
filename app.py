@@ -43,21 +43,29 @@ weather_data = pd.DataFrame({
 if menu == "Researcher Profile":
     st.title("Researcher Profile")
     st.sidebar.header("Profile Options")
-
+    col1, col2 = st.column([3,1])
     # Collect basic information
     name = "Damien Ferreira"
     field = "Biochemistry"
     institution = "North-West University"
 
     # Display basic profile information
-    st.write(f"**Name:** {name}")
-    st.write(f"**Field of Research:** {field}")
-    st.write(f"**Institution:** {institution}")
-    
-    st.image(
-        "Sunset (2).jpg",
-        caption="Sunset (Damien Ferreira)"
-)
+    with col1:
+        st.write(f"**Name:** {name}")
+        st.write(f"**Institution:** {institution}")
+        st.write(f"**Field of Research:** {field}")
+        st.write("""
+        I am a biochemistry student with a strong interest in molecular biology,
+        enzyme kinetics, and microbial physiology. My academic work focuses on
+        applying biochemical techniques to understand biological systems.
+        """)
+        
+    with col12:
+        st.image(
+            "Sunset (2).jpg",
+            caption="Sunset (Damien Ferreira)", 
+            width=200
+    )
 
 elif menu == "Publications":
     st.title("Publications")
@@ -164,6 +172,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
