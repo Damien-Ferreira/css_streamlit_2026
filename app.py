@@ -151,7 +151,7 @@ elif menu == "Contact":
             "Subject", 
             ["General Inquiry","Research Collaboration","Data Request","Other"]
         )
-        message = st.text_area("Message", height 150)
+        message = st.text_area("Message", height=150)
         submitted = st.form_submit_button("Send Message")
 
         if submitted:
@@ -164,6 +164,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
