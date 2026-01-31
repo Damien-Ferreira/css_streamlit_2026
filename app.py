@@ -43,7 +43,7 @@ weather_data = pd.DataFrame({
 if menu == "Researcher Profile":
     st.title("Researcher Profile")
     st.sidebar.header("Profile Options")
-    col1, col2 = st.columns([3,1])
+    col1, col2 = st.columns([1,3])
     # Collect basic information
     name = "Damien Ferreira"
     field = "Biochemistry"
@@ -172,6 +172,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
