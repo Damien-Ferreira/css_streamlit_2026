@@ -56,8 +56,7 @@ if menu == "Researcher Profile":
         st.write(f"**Field of Research:** {field}")
         st.write("""
         I am a biochemistry student with a strong interest in molecular biology,
-        enzyme kinetics, and microbial physiology. My academic work focuses on
-        applying biochemical techniques to understand biological systems.
+        enzyme kinetics, and microbial physiology. 
         """)
         
     with col2:
@@ -172,6 +171,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
