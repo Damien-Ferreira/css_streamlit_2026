@@ -144,7 +144,7 @@ elif menu == "Contact":
         )
     st.subheader("Send a Message")
 
-    with st.form("Contact_Form")
+    with st.form("Contact_Form"):
         name = st.text_input("Your Name")
         email = st.text_input("Your Email")
         subject = st.selectbox(
@@ -164,5 +164,6 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
