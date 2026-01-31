@@ -21,9 +21,9 @@ menu = st.sidebar.radio(
 
 # Dummy STEM data
 enzyme_kinetics_data = pd.DataFrame({
-    "Enzyme": ["Alpha Decay", "Beta Decay", "Gamma Ray Analysis", "Quark Study", "Higgs Boson"],
-    "Substrate Concentration (mM)": [4.2, 1.5, 2.9, 3.4, 7.1],
-    "Reaction rate (µmol/min)": pd.date_range(start="2024-01-01", periods=5),
+    "Enzyme": ["Amylase", "Catalase", "Lipase", "Protease", "Urease"],
+    "Substrate Concentration (mM)": [1, 2, 3, 4, 5],
+    "Reaction Rate (µmol/min)": [5.1, 9.3, 12.7, 14.9, 15.2]
 })
 
 protein_character_data = pd.DataFrame({
@@ -101,7 +101,7 @@ elif menu == "STEM Data Explorer":
     # Tabbed view for STEM data
     data_option = st.sidebar.selectbox(
         "Choose a dataset to explore", 
-        ["Enzyme Kinetics", "Protein Characterization", "Bacterial Growt Data"]
+        ["Enzyme Kinetics", "Protein Characterization", "Bacterial Growth Data"]
     )
 
     if data_option == "Enzyme Kinetics":
@@ -204,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
