@@ -152,7 +152,7 @@ elif menu == "STEM Data Explorer":
         st.line_chart(
         filtered_proteins.set_index("Isoelectric Point (pI)")["Molecular Weight (kDa)"]
     )
-    elif data_option == "Bacterial Growt Data":
+    elif data_option == "Bacterial Growth Data":
         st.write("### Bacterial Growt Data")
         st.dataframe(bacterial_growth_data)
         # Add widgets to filter by temperature and humidity
@@ -166,7 +166,7 @@ elif menu == "STEM Data Explorer":
         )
     )
         filtered_bacteria_growth = bacterial_growth_data[
-            bacterial_growth_data["Optical Density (OD600)"].between(pI_filter[0], pI_filter[1])
+            bacterial_growth_data["Optical Density (OD600)"].between(optical_density_filter[0], optical_density_filter[1])
         ]
         st.write(f"Filtered Results for Optical Density (OD600) {optical_density_filter}:")
         st.dataframe(filtered_bacteria_growth)
@@ -204,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
