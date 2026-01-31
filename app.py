@@ -151,7 +151,7 @@ elif menu == "STEM Data Explorer":
         st.subheader("Isoelectric Point (pI) vs Molecular Weight (kDa)")
         st.line_chart(
         filtered_data.set_index("Isoelectric Point (pI)")["Molecular Weight (kDa)"]
-    
+    )
     elif data_option == "Bacterial Growt Data":
         st.write("### Bacterial Growt Data")
         st.dataframe(bacterial_growth_data)
@@ -174,7 +174,7 @@ elif menu == "STEM Data Explorer":
         st.subheader("Temperature (°C) vs Optical Density (OD600)")
         st.line_chart(
         filtered_data.set_index("Temperature (°C)")["Optical Density (OD600)"]
-
+    )
 elif menu == "Contact":
     # Add a contact section
     st.title("Contact Me")
@@ -204,6 +204,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
