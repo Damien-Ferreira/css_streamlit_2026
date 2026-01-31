@@ -60,7 +60,7 @@ if menu == "Researcher Profile":
         applying biochemical techniques to understand biological systems.
         """)
         
-    with col12:
+    with col2:
         st.image(
             "Sunset (2).jpg",
             caption="Sunset (Damien Ferreira)", 
@@ -172,6 +172,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
