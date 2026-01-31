@@ -64,7 +64,7 @@ if menu == "Researcher Profile":
         st.image(
             "Sunset (2).jpg",
             caption="Sunset (Damien Ferreira)", 
-            width=200
+            use_column_width=True
     )
 
 elif menu == "Publications":
@@ -172,6 +172,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
