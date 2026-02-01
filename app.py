@@ -58,7 +58,7 @@ if menu == "Researcher Profile":
         enzyme kinetics, and microbial physiology. 
         """)
         st.write("""
-        The pages that follow are some things that I found interesting. 
+        I have not done any research yet, so the pages that follow are some things that I found interesting. 
         """)
         
     with col2:
@@ -256,6 +256,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
