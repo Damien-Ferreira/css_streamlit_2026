@@ -16,7 +16,7 @@ st.set_page_config(page_title="Researcher Profile and STEM Data Explorer", layou
 st.sidebar.title("Navigation")
 menu = st.sidebar.radio(
     "Go to:",
-    ["Researcher Profile", "Publications", "STEM Data Explorer", "Contact"],
+    ["Researcher Profile", "Biochemistry Calculator", "STEM Data Explorer", "Contact"],
 )
 
 # Dummy STEM data
@@ -65,34 +65,83 @@ if menu == "Researcher Profile":
             use_column_width=True
     )
 
-elif menu == "Publications":
-    st.title("Publications")
-    st.sidebar.header("Upload and Filter")
+elif menu == "Biochemistry Calculator":
+    st.title("Biochemistry Calculator & Analysis")
+    st.write(
+        "This page provides interactive tools for performing common biochemistry "
+        "and microbial physiology calculations."
+    )
 
-    # Upload publications file
-    uploaded_file = st.file_uploader("Upload a CSV of Publications", type="csv")
-    if uploaded_file:
-        publications = pd.read_csv(uploaded_file)
-        st.dataframe(publications)
+    calculator = st.selectbox(
+        "Select a calculation:",
+        [
+            "Michaelis–Menten Enzyme Kinetics",
+            "Beer–Lambert Law",
+            "Bacterial Growth Rate"
+        ]
+    )
 
-        # Add filtering for year or keyword
-        keyword = st.text_input("Filter by keyword", "")
-        if keyword:
-            filtered = publications[
-                publications.apply(lambda row: keyword.lower() in row.astype(str).str.lower().values, axis=1)
-            ]
-            st.write(f"Filtered Results for '{keyword}':")
-            st.dataframe(filtered)
-        else:
-            st.write("Showing all publications")
+    # Michaelis–Menten Kinetics
+    if calculator == "Michaelis–Menten Enzyme Kinetics":
+        st.subheader("Michaelis–Menten Equation")
 
-        # Publication trends
-        if "Year" in publications.columns:
-            st.subheader("Publication Trends")
-            year_counts = publications["Year"].value_counts().sort_index()
-            st.bar_chart(year_counts)
-        else:
-            st.write("The CSV does not have a 'Year' column to visualize trends.")
+        st.latex(r"v = \frac{V_{max}[S]}{K_m + [S]}")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            vmax = st.number_input("Vmax (µmol/min)", min_value=0.0, value=100.0)
+            km = st.number_input("Km (mM)", min_value=0.01, value=5.0)
+
+        with col2:
+            substrate = st.number_input("Substrate Concentration [S] (mM)", min_value=0.0, value=10.0)
+
+        if st.button("Calculate Reaction Rate"):
+            rate = (vmax * substrate) / (km + substrate)
+            st.success(f"Reaction Rate (v): **{rate:.2f} µmol/min**")
+
+    # Beer–Lambert Law
+    elif calculator == "Beer–Lambert Law":
+        st.subheader("Beer–Lambert Law")
+
+        st.latex(r"A = \varepsilon \cdot l \cdot c")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            absorbance = st.number_input("Absorbance (A)", min_value=0.0, value=0.75)
+            path_length = st.number_input("Path Length (cm)", min_value=0.01, value=1.0)
+
+        with col2:
+            epsilon = st.number_input(
+                "Molar Absorptivity ε (L·mol⁻¹·cm⁻¹)",
+                min_value=0.01,
+                value=15000.0
+            )
+
+        if st.button("Calculate Concentration"):
+            concentration = absorbance / (epsilon * path_length)
+            st.success(f"Concentration (c): **{concentration:.6f} mol/L**")
+
+    # Bacterial Growth Rate
+    elif calculator == "Bacterial Growth Rate":
+        st.subheader("Bacterial Specific Growth Rate")
+
+        st.latex(r"\mu = \frac{\ln N_2 - \ln N_1}{t_2 - t_1}")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            N1 = st.number_input("Initial Cell Density (N₁)", min_value=0.01, value=0.1)
+            t1 = st.number_input("Initial Time t₁ (hours)", min_value=0.0, value=0.0)
+
+        with col2:
+            N2 = st.number_input("Final Cell Density (N₂)", min_value=0.01, value=0.8)
+            t2 = st.number_input("Final Time t₂ (hours)", min_value=0.01, value=6.0)
+
+        if st.button("Calculate Growth Rate"):
+            mu = (np.log(N2) - np.log(N1)) / (t2 - t1)
+            st.success(f"Specific Growth Rate (μ): **{mu:.3f} h⁻¹**")
 
 elif menu == "STEM Data Explorer":
     st.title("STEM Data Explorer")
@@ -204,6 +253,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
