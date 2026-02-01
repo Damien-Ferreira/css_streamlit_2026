@@ -57,7 +57,7 @@ if menu == "Researcher Profile":
         I am a biochemistry student with a strong interest in molecular biology,
         enzyme kinetics, and microbial physiology. 
         """)
-        st.write("""/n
+        st.write("""
         The pages that follow are some things that I found interesting. 
         """)
         
@@ -256,6 +256,7 @@ elif menu == "Contact":
                 st.write(f"- Email: {email}")
                 st.write(f"- Subject: {subject}")
                 st.write(f"- Message: {message}")
+
 
 
 
